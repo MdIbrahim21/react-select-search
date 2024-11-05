@@ -35,3 +35,12 @@ export default function fuzzySearch(options, query) {
               ),
           );
 }
+
+export default function fulltextSearch(options, query) {
+    return !query.length
+        ? options
+        : options.filter((o) =>
+                   query.toLowerCase().includes(
+                  `${o.name} ${o.group || ''}`.trim().toLowerCase())
+          );
+}
