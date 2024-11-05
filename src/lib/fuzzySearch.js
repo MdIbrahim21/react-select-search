@@ -25,22 +25,22 @@ function search(q, text) {
     return true;
 }
 
-export default function fuzzySearch(options, query) {
+export function fuzzySearch(options, query) {
     return !query.length
         ? options
         : options.filter((o) =>
-              search(
-                  query.toLowerCase(),
-                  `${o.name} ${o.group || ''}`.trim().toLowerCase(),
-              ),
-          );
+            search(
+                query.toLowerCase(),
+                `${o.name} ${o.group || ''}`.trim().toLowerCase(),
+            ),
+        );
 }
 
-export default function fulltextSearch(options, query) {
+export function fulltextSearch(options, query) {
     return !query.length
         ? options
-        : options.filter((o) =>
-                   query.toLowerCase().includes(
-                  `${o.name} ${o.group || ''}`.trim().toLowerCase())
-          );
+        : options?.filter((o) =>
+           `${o?.name}`.trim().toLowerCase().indexOf(query.toLowerCase()) == 0
+        );
 }
+
